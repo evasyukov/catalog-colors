@@ -11,6 +11,9 @@ module.exports = {
   },
   resolve: {
     extensions: [".js", ".vue"],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
   },
   module: {
     rules: [
@@ -26,6 +29,10 @@ module.exports = {
         test: /\.css$/,
         use: ["vue-style-loader", "css-loader"],
       },
+      {
+        test: /\.svg$/,
+        use: ['svg-inline-loader']
+      }
     ],
   },
   plugins: [
