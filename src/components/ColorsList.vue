@@ -1,0 +1,75 @@
+<template>
+  <div class="colors-list">
+    <!-- filter  -->
+    <div class="colors-list_filter">
+      <ColorsFilter />
+    </div>
+
+    <!-- list  -->
+    <div class="colors-list_content">
+      <div class="header">
+        <!-- count  -->
+        <div class="header_amount">
+          <span>412 товаров</span>
+        </div>
+
+        <!-- sort  -->
+        <div class="header_sort">
+          <span>Сортировка</span>
+        </div>
+      </div>
+
+      <div class="items">
+        <ItemColor />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import ColorsFilter from "./ColorsFilter.vue"
+import ItemColor from "./ItemColor.vue"
+</script>
+
+<style scoped lang="scss">
+.colors-list {
+  // width: 100%;
+  // height: 100%;
+
+  display: flex;
+
+  margin: 72px 64px 0;
+
+  &_filter {
+    border: 1px solid #000000;
+    width: 20%;
+    max-height: 200px;
+  }
+
+  &_content {
+    width: 80%;
+    height: 500px;
+
+    border: 1px solid #000000;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &_amount {
+        width: 200px;
+        height: 20px;
+      }
+
+      &_sort {
+        width: 200px;
+        height: 20px;
+
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+  }
+}
+</style>
