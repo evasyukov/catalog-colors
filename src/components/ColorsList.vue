@@ -19,8 +19,8 @@
         </div>
       </div>
 
-      <div class="items">
-        <ItemColor />
+      <div class="items" >
+        <ItemColor v-for="item in 5" :key="item"/>
       </div>
     </div>
   </div>
@@ -33,15 +33,11 @@ import ItemColor from "./ItemColor.vue"
 
 <style scoped lang="scss">
 .colors-list {
-  // width: 100%;
-  // height: 100%;
-
   display: flex;
 
   margin: 72px 64px 0;
 
   &_filter {
-    border: 1px solid #000000;
     width: 20%;
     max-height: 200px;
   }
@@ -49,8 +45,6 @@ import ItemColor from "./ItemColor.vue"
   &_content {
     width: 80%;
     height: 500px;
-
-    border: 1px solid #000000;
 
     .header {
       display: flex;
@@ -69,6 +63,12 @@ import ItemColor from "./ItemColor.vue"
         display: flex;
         justify-content: flex-end;
       }
+    }
+
+    .items{
+      display: flex;
+
+      gap: 24px;
     }
   }
 }

@@ -12,14 +12,14 @@ module.exports = {
   resolve: {
     extensions: [".js", ".vue"],
     alias: {
-      '@': path.resolve(__dirname, 'src'),
+      "@": path.resolve(__dirname, "src"),
     },
   },
   module: {
     rules: [
       {
         test: /\.vue$/,
-        loader: "vue-loader",
+        use: "vue-loader",
       },
       {
         test: /\.scss$/,
@@ -31,8 +31,19 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        use: ['svg-inline-loader']
-      }
+        use: ["svg-inline-loader"],
+      },
+      {
+        test: /\.html$/i,
+        loader: 'html-loader',
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: 'asset/resource', 
+        generator: {
+          filename: 'images/[name].[hash][ext]',
+        },
+      },
     ],
   },
   plugins: [
