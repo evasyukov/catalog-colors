@@ -1,18 +1,19 @@
 <template>
   <div class="colors-sort">
     <span @click="toggleModal" class="sort-label">
-      {{ activeSort ? activeSort.label : "Выберите сортировку" }}
+      {{ activeSort ? activeSort.title : "Сортировка" }}
     </span>
 
     <!-- модальное окно  -->
     <div class="modal" v-if="isModalOpen">
       <div
         v-for="item in sort"
-        :key="item.label"
+        :key="item.title"
         class="modal_item"
         @click="selectSort(item)"
+        :class="{ active: item.active }"
       >
-        {{ item.label }}
+        {{ item.title }}
       </div>
     </div>
   </div>
@@ -25,18 +26,21 @@
 import { computed, ref } from "vue"
 
 const sort = ref([
-  { label: "СНАЧАЛА ДОРОГИЕ", active: true },
-  { label: "СНАЧАЛА НЕДОРОГИЕ", active: false },
-  { label: "СНАЧАЛА ПОПУЛЯРНЫЕ", active: false },
-  { label: "СНАЧАЛА НОВЫЕ", active: false },
+  { title: "СНАЧАЛА ДОРОГИЕ", active: true },
+  { title: "СНАЧАЛА НЕДОРОГИЕ", active: false },
+  { title: "СНАЧАЛА ПОПУЛЯРНЫЕ", active: false },
+  { title: "СНАЧАЛА НОВЫЕ", active: false },
 ])
 
 const isModalOpen = ref(false)
 
+const activeSort = computed(() => {
+  return sort.value.find((item) => item.active)
+})
+
 const toggleModal = () => {
   isModalOpen.value = !isModalOpen.value
 }
-
 
 const selectSort = (item) => {
   sort.value.forEach((el) => {
@@ -44,12 +48,8 @@ const selectSort = (item) => {
   })
 
   item.active = true
-  isModalOpen = false
+  toggleModal()
 }
-
-const activeSort = computed(() => {
-  sort.value.find((item) => item.active)
-})
 </script>
 
 <style lang="scss" scoped>
@@ -65,7 +65,6 @@ const activeSort = computed(() => {
 
 .modal {
   width: 280px;
-  // height: 198px;
 
   background-color: #fff;
 
@@ -76,12 +75,8 @@ const activeSort = computed(() => {
   z-index: 10;
 
   .modal_item {
-    // width: 280px;
-    // height: 48px;
-
     display: flex;
     align-items: center;
-    // justify-content: center;
 
     font-size: 12px;
     font-weight: 500;
@@ -91,8 +86,12 @@ const activeSort = computed(() => {
 
     background-color: #fff;
 
+    &.active {
+      background-color: #7bb899;
+    }
+
     &:hover {
-      background-color: #00000017;
+      background-color: #5bb88959;
     }
   }
 }
