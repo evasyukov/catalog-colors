@@ -15,20 +15,22 @@
 
         <!-- sort  -->
         <div class="header_sort">
-          <span>Сортировка</span>
+          <ColorsSort />
         </div>
       </div>
 
-      <div class="items" >
-        <ItemColor v-for="item in 5" :key="item"/>
+      <div class="items">
+        <ItemColor v-for="item in 5" :key="item" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+// components
 import ColorsFilter from "./ColorsFilter.vue"
 import ItemColor from "./ItemColor.vue"
+import ColorsSort from "./ColorsSort.vue"
 </script>
 
 <style scoped lang="scss">
@@ -38,8 +40,8 @@ import ItemColor from "./ItemColor.vue"
   margin: 72px 64px 0;
 
   &_filter {
-    width: 20%;
-    max-height: 200px;
+    width: 303px;
+    height: 200px;
   }
 
   &_content {
@@ -54,6 +56,8 @@ import ItemColor from "./ItemColor.vue"
       &_amount {
         width: 200px;
         height: 20px;
+
+        font-weight: 400;
       }
 
       &_sort {
@@ -62,10 +66,12 @@ import ItemColor from "./ItemColor.vue"
 
         display: flex;
         justify-content: flex-end;
+
+        font-size: 12px;
       }
     }
 
-    .items{
+    .items {
       display: flex;
 
       gap: 24px;
