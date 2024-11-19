@@ -11,6 +11,8 @@
 
       <div class="price">
         <span>3500 ₽</span>
+
+        <button class="btn-add">+</button>
       </div>
     </div>
   </div>
@@ -20,8 +22,6 @@
 
 <style scoped lang="scss">
 .item-color {
-  // border: 1px solid #000;
-
   width: 278px;
   height: 370px;
 
@@ -49,7 +49,46 @@
 
     .price {
       font-weight: 600;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      position: relative;
+
+      .btn-add {
+        width: 80px;
+        height: 32px;
+
+        background-color: #f2f2f2;
+
+        color: #1f2020;
+
+        border: none;
+        border-radius: 8px;
+
+        font-size: 30px;
+        font-weight: 400;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+
+        &:hover {
+          cursor: pointer;
+          background-color: #7bb899;
+        }
+      }
     }
+  }
+
+  &:hover .btn-add {
+    opacity: 1;
+    visibility: visible;
   }
 }
 </style>
