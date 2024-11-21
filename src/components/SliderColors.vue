@@ -1,4 +1,3 @@
-<!-- src/components/Slider.vue -->
 <template>
   <section class="slider">
     <div class="slider_content">

@@ -30,7 +30,7 @@
 // components
 import ColorsFilter from "./ColorsFilter.vue"
 import ItemColor from "./ItemColor.vue"
-import ColorsSort from "./ColorsSort.vue"
+import ColorsSort from "./ColorsSortModal.vue"
 </script>
 
 <style scoped lang="scss">

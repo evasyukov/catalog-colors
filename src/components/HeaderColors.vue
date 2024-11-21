@@ -23,14 +23,16 @@
         <div class="account_item"></div>
         <div class="account_item"></div>
         <div class="account_cart">
-          <span>4</span>
+          <CartModal />
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import CartModal from "./CartModal.vue"
+</script>
 
 <style scoped lang="scss">
 .header {
@@ -119,26 +121,6 @@
         border-radius: 50%;
 
         cursor: pointer;
-      }
-
-      &_cart {
-        width: 24px;
-        height: 24px;
-
-        background-color: #7bb899;
-        border-radius: 50%;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        cursor: pointer;
-
-        span {
-          font-size: 12px;
-          color: #000;
-          font-weight: 500;
-        }
       }
     }
   }

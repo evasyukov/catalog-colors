@@ -9,7 +9,3 @@ import HeaderColors from "./components/HeaderColors.vue";
 import SliderColors from "./components/SliderColors.vue";
 import ColorsList from "./components/ColorsList.vue";
 </script>
-
-<style scoped lang="scss">
-
-</style>
