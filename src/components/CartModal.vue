@@ -44,7 +44,7 @@ import ItemsCart from "./ItemsCart.vue"
 
 const isCartOpen = ref(false)
 const itemsCount = ref(4)
-const totalAmount = ref(14400)
+const totalAmount = ref("14 400")
 
 const clearCart = () => {
   itemsCount.value = 0
@@ -53,6 +53,21 @@ const clearCart = () => {
 </script>
 
 <style lang="scss" scoped>
+.cart {
+  width: 24px;
+  height: 24px;
+
+  border: none;
+  border-radius: 50%;
+  background-color: #7bb899;
+
+  font-size: 12px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .overlay {
   position: fixed;
   top: 0;
