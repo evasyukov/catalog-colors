@@ -1,7 +1,7 @@
 <template>
   <div class="item-color">
     <div class="item-color_image">
-      <img :src="image" alt="Краска" />
+      <img :src="color.color_image" alt="Краска" />
     </div>
 
     <div class="item-color_info">
@@ -27,8 +27,6 @@ const props = defineProps({
     required: true,
   },
 })
-
-const image =  (`../assets/colors/${props.color.color_image}`)
 </script>
 
 <style scoped lang="scss">
