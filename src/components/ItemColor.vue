@@ -1,28 +1,39 @@
 <template>
   <div class="item-color">
     <div class="item-color_image">
-      <img src="../assets/colors/color_one.png" alt="Краска" />
+      <img :src="image" alt="Краска" />
     </div>
 
     <div class="item-color_info">
       <div class="description">
-        <span>Краска Wallquest, Brownsone MS90102</span>
+        <span>{{ color.color_name }}</span>
       </div>
 
       <div class="price">
-        <span>3500 ₽</span>
+        <span>{{ color.color_price}} ₽</span>
 
-        <button class="btn-add">+</button>
+        <button class="btn-add" @click="addToCart">+</button>
       </div>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { defineProps } from "vue"
+
+const props = defineProps({
+  color: {
+    type: Object,
+    required: true,
+  },
+})
+
+const image =  (`../assets/colors/${props.color.color_image}`)
+</script>
 
 <style scoped lang="scss">
 .item-color {
-  width: 278px;
+  width: 260px;
   height: 370px;
 
   &_image {

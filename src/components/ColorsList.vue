@@ -1,36 +1,43 @@
 <template>
   <div class="colors-list">
-    <!-- filter  -->
+    <!-- фильтр  -->
     <div class="colors-list_filter">
       <ColorsFilter />
     </div>
 
-    <!-- list  -->
+    <!-- список   -->
     <div class="colors-list_content">
       <div class="header">
-        <!-- count  -->
+        <!-- количество  -->
         <div class="header_amount">
-          <span>412 товаров</span>
+          <span>{{ colors.length }} товаров</span>
         </div>
 
-        <!-- sort  -->
+        <!-- сортировка  -->
         <div class="header_sort">
           <ColorsSort />
         </div>
       </div>
 
       <div class="items">
-        <ItemColor v-for="item in 5" :key="item" />
+        <ItemColor v-for="color in colors" :key="color.id" :color="color" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { computed } from "vue"
+
 // components
 import ColorsFilter from "./ColorsFilter.vue"
 import ItemColor from "./ItemColor.vue"
 import ColorsSort from "./ColorsSortModal.vue"
+
+import { useColorsStore } from "../storeColors"
+
+const colorsStore = useColorsStore()
+const colors = computed(() => colorsStore.colors)
 </script>
 
 <style scoped lang="scss">
@@ -73,8 +80,9 @@ import ColorsSort from "./ColorsSortModal.vue"
 
     .items {
       display: flex;
+      flex-wrap: wrap; /* Перенос строк */
 
-      gap: 24px;
+      column-gap: 20px;
     }
   }
 }

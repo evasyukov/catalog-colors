@@ -1,7 +1,7 @@
 <template>
   <div class="items">
     <div class="items_image">
-      <img src="../assets/colors/color_one.png" alt="Краска" />
+      <img src="../assets/colors/color_1.png" alt="Краска" />
     </div>
 
     <div class="items_info">
