@@ -1,5 +1,8 @@
 <template>
   <section class="slider">
+    <div class="breadcrumb">
+      <span>ГЛАВНАЯ</span> • <span>ПРОДУКТЫ</span> • <span>КРАСКИ</span>
+    </div>
     <div class="slider_content">
       <h1>Краски</h1>
       <p class="description">
@@ -33,6 +36,27 @@
   justify-content: center;
 
   position: relative;
+
+  .breadcrumb {
+    display: flex;
+    gap: 8px;
+
+    position: absolute;
+    top: 40px;
+    left: 60px;
+
+    color: #ffffff80;
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 2px;
+
+    span {
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 
   &_content {
     text-align: center;
@@ -71,12 +95,31 @@
       cursor: pointer;
       padding: 50px;
 
-    
-
       &.next img {
         transform: rotate(180deg);
       }
     }
+  }
+}
+
+@media (max-width: 1024px) {
+  .slider {
+    &_content {
+      h1 {
+        font-size: 56px;
+        margin-bottom: 12px;
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media (max-width: 680px) {
+  .slider {
+    display: none;
   }
 }
 </style>
