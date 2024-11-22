@@ -1,6 +1,10 @@
 <template>
   <div class="header">
     <div class="header_container">
+      <div class="burger">
+        <img src="../assets/icons/menu.svg" alt="menu" />
+      </div>
+
       <div class="logo">
         <p>COLORS</p>
         <img src="../assets/icons/point.svg" alt="" />
@@ -53,8 +57,10 @@ import CartModal from "./CartModal.vue"
 
   &_container {
     width: 100%;
+
     display: flex;
     align-items: center;
+    justify-content: space-around;
 
     .logo {
       display: flex;
@@ -62,8 +68,6 @@ import CartModal from "./CartModal.vue"
 
       font-size: 24px;
       font-weight: 600;
-
-      margin-left: 66px;
 
       img {
         padding-top: 4px;
@@ -73,14 +77,12 @@ import CartModal from "./CartModal.vue"
     .menu {
       display: flex;
       align-items: center;
-
       gap: 24px;
+
       font-weight: 300;
-      margin-left: 170px;
 
       &_item {
         width: max-content;
-
         cursor: pointer;
       }
     }
@@ -90,11 +92,9 @@ import CartModal from "./CartModal.vue"
       align-items: flex-start;
       flex-direction: column;
 
-      margin-left: 530px;
-
       span {
         font-weight: 500;
-        width: 150px;
+        text-align: start;
       }
 
       button {
@@ -122,8 +122,6 @@ import CartModal from "./CartModal.vue"
 
       gap: 24px;
 
-      margin-left: 110px;
-
       width: 200px;
       height: 20px;
 
@@ -136,6 +134,105 @@ import CartModal from "./CartModal.vue"
         align-items: center;
 
         cursor: pointer;
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .header_container {
+    .logo {
+      font-size: 18px;
+      // font-weight: 600;
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      font-weight: 300;
+
+      &_item {
+        width: max-content;
+        cursor: pointer;
+
+        font-size: 13px;
+      }
+    }
+
+    .contact {
+      span {
+        font-size: 12px;
+        text-align: start;
+      }
+
+      button {
+        font-size: 12px;
+      }
+    }
+
+    .account {
+      gap: 12px;
+    }
+  }
+}
+
+@media (max-width: 790px) {
+  .header_container {
+    .logo {
+      font-size: 24px;
+    }
+
+    .burger {
+      display: block;
+      width: 24px;
+      height: 24px;
+
+      cursor: pointer;
+    }
+
+    .account {
+      gap: 24px;
+    }
+
+    .menu,
+    .contact {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 425px) {
+  .header_container {
+    
+
+    .logo {
+      font-size: 24px;
+      margin-left: 70px;
+
+      img {
+        margin-left: 4px;
+      }
+    }
+
+    .burger {
+      display: block;
+      width: 24px;
+      height: 24px;
+
+      margin-left: 30px;
+
+      cursor: pointer;
+    }
+
+    .account_item:not(:last-child) {
+      display: none;
+    }
+
+    .account {
+      &_cart{
+        margin-left: 80px;
       }
     }
   }
