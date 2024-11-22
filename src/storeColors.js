@@ -4,8 +4,8 @@ export const useColorsStore = defineStore("colors", {
   state: () => ({
     colors: [],          // массив с красками
     cart: [],            // корзина с товарами
-    loading: false,      // Для индикации загрузки
-    error: null,         // Для ошибок
+    loading: false,      // индикации загрузки
+    error: null,         // ошибка
   }),
 
   actions: {

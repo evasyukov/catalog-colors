@@ -1,11 +1,14 @@
 <template>
-  <div class="colors-list">
+  <div v-if="loading" class="processing">Загрузка...</div>
+  <div v-else-if="error" class="processing">{{ error }}</div>
+  <div class="colors-list" v-else>
     <!-- фильтр  -->
     <div class="colors-list_filter">
       <ColorsFilter />
     </div>
 
     <!-- список   -->
+
     <div class="colors-list_content">
       <div class="header">
         <!-- количество  -->
@@ -15,19 +18,23 @@
 
         <!-- сортировка  -->
         <div class="header_sort">
-          <ColorsSort />
+          <ColorsSort @sort="sortValue" />
         </div>
       </div>
 
       <div class="items">
-        <ItemColor v-for="color in colors" :key="color.id" :color="color" />
+        <ItemColor
+          v-for="color in sortedColors"
+          :key="color.id"
+          :color="color"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from "vue"
+import { computed, ref } from "vue"
 
 // components
 import ColorsFilter from "./ColorsFilter.vue"
@@ -38,9 +45,46 @@ import { useColorsStore } from "../storeColors"
 
 const colorsStore = useColorsStore()
 const colors = computed(() => colorsStore.colors)
+const sortCriteria = ref("priceLowToHigh")
+
+const loading = computed(() => colorsStore.loading)
+const error = computed(() => colorsStore.error)
+
+const sortValue = (title) => {
+  sortCriteria.value = title
+}
+
+const sortedColors = computed(() => {
+  const colors = [...colorsStore.colors]
+
+  switch (sortCriteria.value) {
+    case "СНАЧАЛА ДОРОГИЕ":
+      return colors.sort((a, b) => b.color_price - a.color_price)
+    case "СНАЧАЛА НЕДОРОГИЕ":
+      return colors.sort((a, b) => a.color_price - b.color_price)
+    case "СНАЧАЛА ПОПУЛЯРНЫЕ":
+      return colors.sort((a, b) => b.amountFeedback - a.amountFeedback)
+    case "СНАЧАЛА НОВЫЕ":
+      console.log("новые ", Date)
+      return colors.sort((a, b) => new Date(b.date) - new Date(a.date))
+
+    default:
+      return colors.sort((a, b) => b.color_price - a.color_price)
+  }
+})
 </script>
 
 <style scoped lang="scss">
+.processing {
+  width: 100%;
+
+  margin-top: 30px;
+
+  display: flex;
+  justify-content: center;
+
+  font-size: 30px;
+}
 .colors-list {
   display: flex;
 

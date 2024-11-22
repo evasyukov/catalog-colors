@@ -1,7 +1,7 @@
 <template>
   <div class="colors-sort">
     <span @click="toggleModal" class="sort-label">
-      {{ activeSort ? activeSort.title : "Сортировка" }}
+      {{ activeSort.title }}
     </span>
 
     <!-- модальное окно  -->
@@ -19,11 +19,13 @@
   </div>
 
   <!-- фон модального окна  -->
-  <div class="overlay" v-if="isModalOpen" @click="isModalOpen = false"></div>
+  <div class="overlay" v-if="isModalOpen" @click="toggleModal"></div>
 </template>
 
 <script setup>
-import { computed, ref } from "vue"
+import { ref, defineEmits } from "vue"
+
+const emits = defineEmits(["sort"])
 
 const sort = ref([
   { title: "СНАЧАЛА ДОРОГИЕ", active: true },
@@ -33,21 +35,17 @@ const sort = ref([
 ])
 
 const isModalOpen = ref(false)
-
-const activeSort = computed(() => {
-  return sort.value.find((item) => item.active)
-})
-
 const toggleModal = () => {
   isModalOpen.value = !isModalOpen.value
 }
 
-const selectSort = (item) => {
-  sort.value.forEach((el) => {
-    el.active = false
-  })
+const activeSort = ref(sort.value[0])
 
-  item.active = true
+// выбор сортровки
+const selectSort = (item) => {
+  activeSort.value = item
+  emits("sort", item.title)
+
   toggleModal()
 }
 </script>

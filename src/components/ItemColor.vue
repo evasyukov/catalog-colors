@@ -10,7 +10,7 @@
       </div>
 
       <div class="price">
-        <span>{{ color.color_price}} ₽</span>
+        <span>{{ +color.color_price}} ₽</span>
 
         <button class="btn-add" @click="addToCart">+</button>
       </div>
@@ -32,7 +32,7 @@ const props = defineProps({
 <style scoped lang="scss">
 .item-color {
   width: 260px;
-  height: 370px;
+  // height: 370px;
 
   &_image {
     width: 100%;
