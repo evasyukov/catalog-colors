@@ -1,25 +1,45 @@
 <template>
   <div class="items">
     <div class="items_image">
-      <img src="../assets/colors/color_1.png" alt="Краска" />
+      <img :src="item.color_image" alt="Краска" />
     </div>
 
     <div class="items_info">
-      <p class="name">Краска Wallquest, Brownsone MS90102</p>
-      <p class="price">3500 ₽</p>
+      <p class="name">{{ item.color_name }}</p>
+      <p class="price">{{ item.color_price }} ₽</p>
     </div>
 
     <div class="items_amount">
-      <button class="btn">-</button>
-      <div class="amount">1</div>
-      <button class="btn">+</button>
+      <button class="btn" @click="updateQuantity(-1)">-</button>
+      <div class="amount">{{ item.quantity }}</div>
+      <button class="btn" @click="updateQuantity(1)">+</button>
     </div>
 
-    <button class="items_delete">x</button>
+    <button class="items_delete" @click="removeItem">x</button>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { defineProps } from "vue"
+import { useColorsStore } from "../storeColors"
+
+const props = defineProps({
+  item: {
+    type: Object,
+    required: true,
+  },
+})
+
+const colorsStore = useColorsStore()
+
+const updateQuantity = (amount) => {
+  colorsStore.updateQuantity(props.item.id, amount)
+}
+
+const removeItem = () => {
+  colorsStore.removeFromCart(props.item.id)
+}
+</script>
 
 <style lang="scss" scoped>
 .items {

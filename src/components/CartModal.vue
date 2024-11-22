@@ -1,34 +1,44 @@
 <template>
   <div>
-    <button @click="isCartOpen = true" class="cart">{{ itemsCount }}</button>
+    <button @click="changeVisibleCart" class="cart">
+      {{ colorsStore.itemsCount }}
+    </button>
 
     <div class="overlay" v-if="isCartOpen">
       <!-- cart -->
       <div class="cart-modal">
         <div class="cart-modal_header">
           <p>Корзина</p>
-          <button class="close-button" @click="isCartOpen = false">x</button>
+          <button class="close-button" @click="changeVisibleCart">x</button>
         </div>
 
         <!-- Основное содержимое -->
-        <div class="cart-modal_body">
+        <div class="cart-modal_body" v-if="colorsStore.cart.length > 0">
           <div class="count">
-            <p>{{ itemsCount }} товара</p>
+            <p>{{ colorsStore.itemsCount }} товаров</p>
             <button class="clear-button" @click="clearCart">
               ОЧИСТИТЬ СПИСОК
             </button>
           </div>
 
           <div class="items">
-            <ItemsCart v-for="item in 3" :key="item" />
+            <ItemCart
+              v-for="item in colorsStore.cart"
+              :key="item.id"
+              :item="item"
+            />
           </div>
+        </div>
+
+        <div class="cart-modal_empty" v-else>
+          <p>Корзина пуста</p>
         </div>
 
         <!-- Нижняя часть корзины -->
         <div class="cart-modal_summary">
           <div class="total-amount">
             <p class="title">Итого:</p>
-            <p class="total-price">{{ totalAmount }} ₽</p>
+            <p class="total-price">{{ colorsStore.totalAmount }} ₽</p>
           </div>
 
           <button class="checkout">ОФОРМИТЬ ЗАКАЗ</button>
@@ -40,15 +50,18 @@
 
 <script setup>
 import { ref } from "vue"
-import ItemsCart from "./ItemsCart.vue"
+import ItemCart from "./ItemCart.vue"
+import { useColorsStore } from "../storeColors"
+const colorsStore = useColorsStore()
 
 const isCartOpen = ref(false)
-const itemsCount = ref(4)
-const totalAmount = ref("14 400")
 
 const clearCart = () => {
-  itemsCount.value = 0
-  totalAmount.value = 0
+  colorsStore.clearCart()
+}
+
+const changeVisibleCart = () => {
+  isCartOpen.value = !isCartOpen.value
 }
 </script>
 
@@ -62,6 +75,7 @@ const clearCart = () => {
   background-color: #7bb899;
 
   font-size: 12px;
+  cursor: pointer;
 
   display: flex;
   justify-content: center;
@@ -139,6 +153,16 @@ const clearCart = () => {
         }
       }
     }
+  }
+
+  &_empty {
+    display: flex;
+    justify-content: center;
+  
+    font-size: 24px;
+    font-weight: 300;
+
+    margin-top: 94px;
   }
 
   &_summary {

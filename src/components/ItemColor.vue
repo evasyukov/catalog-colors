@@ -20,6 +20,9 @@
 
 <script setup>
 import { defineProps } from "vue"
+import { useColorsStore } from "../storeColors"
+
+const colorsStore = useColorsStore()
 
 const props = defineProps({
   color: {
@@ -27,6 +30,10 @@ const props = defineProps({
     required: true,
   },
 })
+
+const addToCart = () => {
+  colorsStore.addToCart(props.color)
+}
 </script>
 
 <style scoped lang="scss">

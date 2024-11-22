@@ -8,6 +8,17 @@ export const useColorsStore = defineStore("colors", {
     error: null, // ошибка
   }),
 
+  getters: {
+    itemsCount: (state) =>
+      state.cart.reduce((total, item) => total + item.quantity, 0),
+
+    totalAmount: (state) =>
+      state.cart.reduce(
+        (total, item) => total + item.color_price * item.quantity,
+        0
+      ),
+  },
+
   actions: {
     /* Получение списка красок
       {
@@ -40,6 +51,37 @@ export const useColorsStore = defineStore("colors", {
       } finally {
         this.loading = false
       }
+    },
+
+    // добавление товара в корзину
+    addToCart(item) {
+      const existingItem = this.cart.find((i) => i.id === item.id)
+      if (existingItem) {
+        existingItem.quantity += 1
+      } else {
+        this.cart.push({ ...item, quantity: 1 })
+      }
+    },
+
+    // удаление товара из корзины
+    removeFromCart(id) {
+      this.cart = this.cart.filter((item) => item.id !== id)
+    },
+
+    // обновление количества товара в корзине
+    updateQuantity(id, amount) {
+      const item = this.cart.find((i) => i.id === id)
+      if (item) {
+        item.quantity += amount
+        if (item.quantity <= 0) {
+          this.removeFromCart(id)
+        }
+      }
+    },
+
+    // очистка корзины
+    clearCart() {
+      this.cart = []
     },
   },
 })

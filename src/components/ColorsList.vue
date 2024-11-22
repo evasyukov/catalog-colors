@@ -33,17 +33,21 @@
 
 <script setup>
 import { computed, ref } from "vue"
+
 // components
 import ColorsFilter from "./ColorsFilter.vue"
 import ItemColor from "./ItemColor.vue"
 import ColorsSort from "./ColorsSortModal.vue"
+
 // store
 import { useColorsStore } from "../storeColors"
 const colorsStore = useColorsStore()
 const colors = computed(() => colorsStore.colors)
+
 // loading
 const loading = computed(() => colorsStore.loading)
 const error = computed(() => colorsStore.error)
+
 // sort and filter
 const sortCriteria = ref("СНАЧАЛА ДОРОГИЕ")
 const activeFilters = ref([])
