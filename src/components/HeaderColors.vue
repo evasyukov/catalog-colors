@@ -1,8 +1,15 @@
 <template>
   <div class="header">
     <div class="header_container">
-      <div class="burger">
+      <div class="burger" @click="toggleMenu">
         <img src="../assets/icons/menu.svg" alt="menu" />
+        <div class="dropdown_menu" v-if="isMenuOpen">
+          <div class="menu_item">ПРОДУКТЫ</div>
+          <div class="menu_item">ЦВЕТА</div>
+          <div class="menu_item">ВДОХНОВЕНИЕ</div>
+          <div class="menu_item">СОВЕТЫ</div>
+          <div class="menu_item">НАЙТИ МАГАЗИН</div>
+        </div>
       </div>
 
       <div class="logo">
@@ -42,7 +49,14 @@
 </template>
 
 <script setup>
+import { ref } from "vue"
 import CartModal from "./CartModal.vue"
+
+const isMenuOpen = ref(false)
+
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value
+}
 </script>
 
 <style scoped lang="scss">
@@ -61,6 +75,10 @@ import CartModal from "./CartModal.vue"
     display: flex;
     align-items: center;
     justify-content: space-around;
+
+    .burger {
+      display: none;
+    }
 
     .logo {
       display: flex;
@@ -190,6 +208,32 @@ import CartModal from "./CartModal.vue"
       height: 24px;
 
       cursor: pointer;
+
+      .dropdown_menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        width: 200px;
+        background-color: #fff;
+
+        position: absolute;
+        top: 60px;
+        left: 0px;
+
+        z-index: 1;
+
+        .menu_item {
+          width: 80%;
+          padding: 16px 20px;
+
+          border-bottom: 1px solid #d7d7d7;
+
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+      }
     }
 
     .account {
@@ -205,8 +249,6 @@ import CartModal from "./CartModal.vue"
 
 @media (max-width: 425px) {
   .header_container {
-    
-
     .logo {
       font-size: 24px;
       margin-left: 70px;
@@ -231,7 +273,7 @@ import CartModal from "./CartModal.vue"
     }
 
     .account {
-      &_cart{
+      &_cart {
         margin-left: 80px;
       }
     }
