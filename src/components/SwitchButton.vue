@@ -14,10 +14,10 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(["update:modelValue"])
+const emits = defineEmits(["update:modelValue"])
 
 function toggle() {
-  emit("update:modelValue", !props.modelValue)
+  emits("update:modelValue", !props.modelValue)
 }
 </script>
 

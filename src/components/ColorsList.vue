@@ -1,22 +1,20 @@
 <template>
   <div v-if="loading" class="processing">Загрузка...</div>
   <div v-else-if="error" class="processing">{{ error }}</div>
+
   <div class="colors-list" v-else>
     <!-- фильтр  -->
     <div class="colors-list_filter">
-      <ColorsFilter />
+      <ColorsFilter @filter="filterValue" />
     </div>
 
     <!-- список   -->
-
     <div class="colors-list_content">
       <div class="header">
-        <!-- количество  -->
         <div class="header_amount">
-          <span>{{ colors.length }} товаров</span>
+          <span>{{ sortedColors.length }} товаров</span>
         </div>
 
-        <!-- сортировка  -->
         <div class="header_sort">
           <ColorsSort @sort="sortValue" />
         </div>
@@ -35,41 +33,48 @@
 
 <script setup>
 import { computed, ref } from "vue"
-
 // components
 import ColorsFilter from "./ColorsFilter.vue"
 import ItemColor from "./ItemColor.vue"
 import ColorsSort from "./ColorsSortModal.vue"
-
+// store
 import { useColorsStore } from "../storeColors"
-
 const colorsStore = useColorsStore()
 const colors = computed(() => colorsStore.colors)
-const sortCriteria = ref("priceLowToHigh")
-
+// loading
 const loading = computed(() => colorsStore.loading)
 const error = computed(() => colorsStore.error)
+// sort and filter
+const sortCriteria = ref("СНАЧАЛА ДОРОГИЕ")
+const activeFilters = ref([])
 
 const sortValue = (title) => {
   sortCriteria.value = title
 }
+const filterValue = (filters) => {
+  activeFilters.value = filters
+}
+
+const filteredColors = computed(() => {
+  return colors.value.filter((color) => {
+    return activeFilters.value.every((filter) => color[filter])
+  })
+})
 
 const sortedColors = computed(() => {
-  const colors = [...colorsStore.colors]
+  const colorsFilter = [...filteredColors.value]
 
   switch (sortCriteria.value) {
     case "СНАЧАЛА ДОРОГИЕ":
-      return colors.sort((a, b) => b.color_price - a.color_price)
+      return colorsFilter.sort((a, b) => b.color_price - a.color_price)
     case "СНАЧАЛА НЕДОРОГИЕ":
-      return colors.sort((a, b) => a.color_price - b.color_price)
+      return colorsFilter.sort((a, b) => a.color_price - b.color_price)
     case "СНАЧАЛА ПОПУЛЯРНЫЕ":
-      return colors.sort((a, b) => b.amountFeedback - a.amountFeedback)
+      return colorsFilter.sort((a, b) => b.amountFeedback - a.amountFeedback)
     case "СНАЧАЛА НОВЫЕ":
-      console.log("новые ", Date)
-      return colors.sort((a, b) => new Date(b.date) - new Date(a.date))
-
+      return colorsFilter.sort((a, b) => new Date(b.date) - new Date(a.date))
     default:
-      return colors.sort((a, b) => b.color_price - a.color_price)
+      return colorsFilter.sort((a, b) => b.color_price - a.color_price)
   }
 })
 </script>

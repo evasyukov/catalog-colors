@@ -1,35 +1,51 @@
-<!-- ColorsFilter.vue -->
 <template>
   <div class="filter-list">
-    <div v-for="(item, index) in filters" :key="index" class="filter-list_item">
+    <div
+      class="filter-list_item"
+      v-for="(item, index) in filters"
+      :key="index"
+    >
       <SwitchButton v-model="item.active" />
-      <span>{{ item.label }}</span>
+      <span @click="item.active = !item.active">{{ item.label }}</span>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { ref, watch, defineEmits } from "vue"
 import SwitchButton from "./SwitchButton.vue"
 
+const emits = defineEmits(["filter"])
+
 const filters = ref([
-  { label: "Новинки", active: true },
-  { label: "Есть в наличии", active: false },
-  { label: "Контрактные", active: false },
-  { label: "Эксклюзивные", active: false },
-  { label: "Распродажа", active: false },
+  { label: "Новинки", active: false, key: "isNew" },
+  { label: "Есть в наличии", active: false, key: "isStocked" },
+  { label: "Контрактные", active: false, key: "isContract" },
+  { label: "Эксклюзивные", active: false, key: "isExclusive" },
+  { label: "Распродажа", active: false, key: "isSale" },
 ])
+
+watch(filters, (newFilters) => {
+    const activeFilters = newFilters.filter((f) => f.active).map((f) => f.key)
+    emits("filter", activeFilters) 
+  },
+  { deep: true }
+)
 </script>
 
 <style lang="scss" scoped>
 .filter-list {
   width: 200px;
-    
+
   &_item {
     display: flex;
     gap: 8px;
 
     margin: 10px 0;
+
+    user-select: none;
+
+    cursor: pointer;
   }
 }
 </style>
