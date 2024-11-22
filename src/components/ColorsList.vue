@@ -98,7 +98,7 @@ const sortedColors = computed(() => {
 .colors-list {
   display: flex;
 
-  margin: 72px 64px 0;
+  margin: 72px 64px 140px;
 
   &_filter {
     width: 303px;
@@ -107,7 +107,6 @@ const sortedColors = computed(() => {
 
   &_content {
     width: 80%;
-    height: 500px;
 
     .header {
       display: flex;
