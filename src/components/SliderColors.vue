@@ -9,16 +9,17 @@
     </div>
 
     <div class="slider_controls">
-      <button class="btn prev"> 
-        ‹
+      <button class="btn prev">
+        <img src="../assets/icons/arrow.svg" alt="" />
       </button>
-      <button class="btn next">›</button>
+      <button class="btn next">
+        <img src="../assets/icons/arrow.svg" alt="" />
+      </button>
     </div>
   </section>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
 <style lang="scss" scoped>
 .slider {
@@ -68,7 +69,13 @@
 
       font-size: 24px;
       cursor: pointer;
-      padding: 10px;
+      padding: 50px;
+
+    
+
+      &.next img {
+        transform: rotate(180deg);
+      }
     }
   }
 }

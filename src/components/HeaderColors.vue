@@ -1,7 +1,10 @@
 <template>
   <div class="header">
     <div class="header_container">
-      <div class="logo">COLORS</div>
+      <div class="logo">
+        <p>COLORS</p>
+        <img src="../assets/icons/point.svg" alt="" />
+      </div>
 
       <div class="menu">
         <div class="menu_item">ПРОДУКТЫ</div>
@@ -18,10 +21,14 @@
 
       <div class="account">
         <div class="account_item">
-          <!-- <img src="../assets/icons/search.svg" /> -->
+          <img src="../assets/icons/search.svg" />
         </div>
-        <div class="account_item"></div>
-        <div class="account_item"></div>
+        <div class="account_item">
+          <img src="../assets/icons/user.svg" />
+        </div>
+        <div class="account_item">
+          <img src="../assets/icons/heart.svg" />
+        </div>
         <div class="account_cart">
           <CartModal />
         </div>
@@ -50,10 +57,17 @@ import CartModal from "./CartModal.vue"
     align-items: center;
 
     .logo {
+      display: flex;
+      align-items: flex-start;
+
       font-size: 24px;
       font-weight: 600;
 
       margin-left: 66px;
+
+      img {
+        padding-top: 4px;
+      }
     }
 
     .menu {
@@ -117,8 +131,9 @@ import CartModal from "./CartModal.vue"
         width: 24px;
         height: 24px;
 
-        background-color: #000;
-        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         cursor: pointer;
       }

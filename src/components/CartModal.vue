@@ -9,7 +9,9 @@
       <div class="cart-modal">
         <div class="cart-modal_header">
           <p>Корзина</p>
-          <button class="close-button" @click="changeVisibleCart">x</button>
+          <button class="close-button" @click="changeVisibleCart">
+            <img src="../assets/icons/close.svg" alt="" />
+          </button>
         </div>
 
         <!-- Основное содержимое -->
@@ -123,6 +125,11 @@ const changeVisibleCart = () => {
 
       border: 1px solid #e6e6e6;
       cursor: pointer;
+
+      img{
+        width: 20px;
+        height: 20px;
+      }
     }
   }
 

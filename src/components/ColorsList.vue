@@ -17,6 +17,7 @@
 
         <div class="header_sort">
           <ColorsSort @sort="sortValue" />
+          <img src="../assets/icons/sort.svg" alt="">
         </div>
       </div>
 

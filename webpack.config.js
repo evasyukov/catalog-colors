@@ -30,10 +30,6 @@ module.exports = {
         use: ["vue-style-loader", "css-loader"],
       },
       {
-        test: /\.svg$/,
-        use: ["svg-inline-loader"],
-      },
-      {
         test: /\.html$/i,
         loader: 'html-loader',
       },

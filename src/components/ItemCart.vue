@@ -10,12 +10,18 @@
     </div>
 
     <div class="items_amount">
-      <button class="btn" @click="updateQuantity(-1)">-</button>
+      <button class="btn" @click="updateQuantity(-1)">
+        <img src="../assets/icons/minus.svg" alt="" />
+      </button>
       <div class="amount">{{ item.quantity }}</div>
-      <button class="btn" @click="updateQuantity(1)">+</button>
+      <button class="btn" @click="updateQuantity(1)">
+        <img src="../assets/icons/plus.svg" alt="" />
+      </button>
     </div>
 
-    <button class="items_delete" @click="removeItem">x</button>
+    <button class="items_delete" @click="removeItem">
+      <img src="../assets/icons/close.svg" alt="" />
+    </button>
   </div>
 </template>
 
@@ -92,6 +98,11 @@ const removeItem = () => {
       border-radius: 4px;
 
       cursor: pointer;
+
+      img {
+        width: 16px;
+        height: 16px;
+      }
     }
 
     .amount {
@@ -110,7 +121,13 @@ const removeItem = () => {
     border: none;
     padding: 0;
 
-    color: #a6a6a6;
+    cursor: pointer;
+
+
+    img {
+      color: #a6a6a6;
+
+    }
   }
 }
 </style>
