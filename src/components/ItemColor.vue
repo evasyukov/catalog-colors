@@ -72,8 +72,6 @@ const addToCart = () => {
       align-items: center;
       justify-content: space-between;
 
-      // position: relative;
-
       .btn-add {
         width: 80px;
         height: 32px;
@@ -127,7 +125,6 @@ const addToCart = () => {
   }
 
   @media (max-width: 480px) {
-    // width: 120px;
     .btn-add {
       width: 32px;
       height: 28px;
@@ -138,7 +135,6 @@ const addToCart = () => {
     width: 110px;
 
     &_image {
-
       img {
         padding: 15px;
       }

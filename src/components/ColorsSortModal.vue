@@ -57,7 +57,10 @@ const selectSort = (item) => {
 
   .sort-label {
     cursor: pointer;
-    font-weight: bold;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+
   }
 }
 

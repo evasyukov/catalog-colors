@@ -5,7 +5,7 @@
     </button>
 
     <div class="overlay" v-if="isCartOpen">
-      <!-- cart -->
+      <!-- корзина -->
       <div class="cart-modal">
         <div class="cart-modal_header">
           <p>Корзина</p>
@@ -14,7 +14,7 @@
           </button>
         </div>
 
-        <!-- Основное содержимое -->
+        <!-- основное содержимое -->
         <div class="cart-modal_body" v-if="colorsStore.cart.length > 0">
           <div class="count">
             <p>{{ colorsStore.itemsCount }} товаров</p>
@@ -36,7 +36,7 @@
           <p>Корзина пуста</p>
         </div>
 
-        <!-- Нижняя часть корзины -->
+        <!-- нижняя часть корзины -->
         <div class="cart-modal_summary">
           <div class="total-amount">
             <p class="title">Итого:</p>
@@ -93,7 +93,7 @@ const changeVisibleCart = () => {
   background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: flex-end;
-  z-index: 1;
+  z-index: 100;
 }
 
 .cart-modal {
@@ -205,6 +205,11 @@ const changeVisibleCart = () => {
 
       cursor: pointer;
     }
+  }
+
+
+  @media (max-width: 720px) {
+    width: 100%;
   }
 }
 </style>

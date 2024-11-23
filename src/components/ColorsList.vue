@@ -12,7 +12,7 @@
     <div class="colors-list_content">
       <div class="header">
         <div class="header_amount">
-          <span>{{ sortedColors.length }} товаров</span>
+          <span>{{ sortedColors.length }} ТОВАРОВ</span>
         </div>
         <div class="mobile-filter-button">
           <button @click="toggleFilterModal">ФИЛЬТРЫ</button>
@@ -41,7 +41,11 @@
     <ColorsFilter @filter="filterValue" />
   </div>
 
-  <div class="overlay" v-if="isFilterModalOpen" @click="closeFilterModal"></div>
+  <div
+    class="overlay"
+    v-if="isFilterModalOpen"
+    @click="toggleFilterModal"
+  ></div>
 </template>
 
 <script setup>
@@ -141,9 +145,6 @@ const endSwipe = (event) => {
 
 .colors-list {
   display: flex;
-  // flex-wrap: wrap;
-  // justify-content: center;
-
   margin: 72px 64px 140px;
 
   &_filter {
@@ -152,7 +153,6 @@ const endSwipe = (event) => {
   }
 
   &_content {
-    // flex: 1;
     width: 80%;
 
     .header {
@@ -165,7 +165,9 @@ const endSwipe = (event) => {
       &_amount {
         width: 200px;
         height: 20px;
-        font-weight: 400;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        font-size: 12px;
       }
 
       &_sort {
@@ -181,7 +183,7 @@ const endSwipe = (event) => {
     .items {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: flex-end;
 
       column-gap: 20px;
@@ -204,14 +206,13 @@ const endSwipe = (event) => {
 .mobile-filter-button {
   text-align: center;
   display: none;
-  
 
   button {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    font-size: 14px;
-    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1px;
   }
 }
 
@@ -228,7 +229,6 @@ const endSwipe = (event) => {
 
   border-top-left-radius: 24px;
   border-top-right-radius: 24px;
-
 
   .modal-header {
     display: flex;
