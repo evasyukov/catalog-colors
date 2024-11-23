@@ -10,7 +10,7 @@
       </div>
 
       <div class="price">
-        <span>{{ +color.color_price}} ₽</span>
+        <span>{{ +color.color_price }} ₽</span>
 
         <button class="btn-add" @click="addToCart">+</button>
       </div>
@@ -39,13 +39,15 @@ const addToCart = () => {
 <style scoped lang="scss">
 .item-color {
   width: 260px;
-  // height: 370px;
 
   &_image {
     width: 100%;
 
     img {
-      padding: 39px;
+      width: 100%;
+      height: auto;
+
+      padding: 35px;
     }
   }
 
@@ -70,7 +72,7 @@ const addToCart = () => {
       align-items: center;
       justify-content: space-between;
 
-      position: relative;
+      // position: relative;
 
       .btn-add {
         width: 80px;
@@ -105,6 +107,50 @@ const addToCart = () => {
   &:hover .btn-add {
     opacity: 1;
     visibility: visible;
+  }
+
+  @media (max-width: 1024px) {
+    width: 200px;
+  }
+
+  @media (max-width: 860px) {
+    width: 150px;
+
+    .price {
+      font-size: 14px;
+    }
+
+    .btn-add {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  @media (max-width: 480px) {
+    // width: 120px;
+    .btn-add {
+      width: 32px;
+      height: 28px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    width: 110px;
+
+    &_image {
+
+      img {
+        padding: 15px;
+      }
+    }
+
+    .description {
+      font-size: 12px;
+    }
+
+    .price {
+      font-size: 12px;
+    }
   }
 }
 </style>

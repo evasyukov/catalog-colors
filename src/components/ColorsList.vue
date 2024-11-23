@@ -5,7 +5,7 @@
   <div class="colors-list" v-else>
     <!-- фильтр  -->
     <div class="colors-list_filter">
-      <ColorsFilter @filter="filterValue" />
+      <ColorsFilter @filter="filterValue" class="max" />
     </div>
 
     <!-- список   -->
@@ -14,10 +14,13 @@
         <div class="header_amount">
           <span>{{ sortedColors.length }} товаров</span>
         </div>
+        <div class="mobile-filter-button">
+          <button @click="toggleFilterModal">ФИЛЬТРЫ</button>
+        </div>
 
         <div class="header_sort">
           <ColorsSort @sort="sortValue" />
-          <img src="../assets/icons/sort.svg" alt="">
+          <img src="../assets/icons/sort.svg" alt="" />
         </div>
       </div>
 
@@ -30,10 +33,19 @@
       </div>
     </div>
   </div>
+
+  <div class="filter-modal" v-if="isFilterModalOpen">
+    <div class="modal-header" @touchstart="startSwipe" @touchend="endSwipe">
+      <div class="swipe-bar"></div>
+    </div>
+    <ColorsFilter @filter="filterValue" />
+  </div>
+
+  <div class="overlay" v-if="isFilterModalOpen" @click="closeFilterModal"></div>
 </template>
 
 <script setup>
-import { computed, ref } from "vue"
+import { computed, onMounted, onUnmounted, ref } from "vue"
 
 // components
 import ColorsFilter from "./ColorsFilter.vue"
@@ -82,6 +94,37 @@ const sortedColors = computed(() => {
       return colorsFilter.sort((a, b) => b.color_price - a.color_price)
   }
 })
+
+const isMobile = ref(window.innerWidth < 1020)
+const isFilterModalOpen = ref(false)
+
+const checkScreenSize = () => {
+  isMobile.value = window.innerWidth <= 1020
+}
+
+const toggleFilterModal = () => {
+  isFilterModalOpen.value = !isFilterModalOpen.value
+}
+
+onMounted(() => {
+  window.addEventListener("resize", checkScreenSize)
+})
+onUnmounted(() => {
+  window.removeEventListener("resize", checkScreenSize)
+})
+
+const touchStartY = ref(0)
+
+const startSwipe = (event) => {
+  touchStartY.value = event.touches[0].clientY
+}
+
+const endSwipe = (event) => {
+  const touchEndY = event.changedTouches[0].clientY
+  if (touchEndY - touchStartY.value > 70) {
+    toggleFilterModal()
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -95,17 +138,21 @@ const sortedColors = computed(() => {
 
   font-size: 30px;
 }
+
 .colors-list {
   display: flex;
+  // flex-wrap: wrap;
+  // justify-content: center;
 
   margin: 72px 64px 140px;
 
   &_filter {
-    width: 303px;
-    height: 200px;
+    width: 220px;
+    margin-right: 20px;
   }
 
   &_content {
+    // flex: 1;
     width: 80%;
 
     .header {
@@ -113,29 +160,118 @@ const sortedColors = computed(() => {
       justify-content: space-between;
       align-items: center;
 
+      width: 90%;
+
       &_amount {
         width: 200px;
         height: 20px;
-
         font-weight: 400;
       }
 
       &_sort {
-        width: 200px;
-        height: 20px;
-
         display: flex;
-        justify-content: flex-end;
+        font-size: 14px;
 
-        font-size: 12px;
+        @media (max-width: 450px) {
+          font-size: 10px;
+        }
       }
     }
 
     .items {
       display: flex;
-      flex-wrap: wrap; /* Перенос строк */
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-end;
 
       column-gap: 20px;
+    }
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: flex-end;
+  z-index: 1;
+}
+
+.mobile-filter-button {
+  text-align: center;
+  display: none;
+  
+
+  button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+  }
+}
+
+.filter-modal {
+  width: 100%;
+  height: 60%;
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+
+  background-color: #fff;
+
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+
+
+  .modal-header {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+
+    .swipe-bar {
+      width: 30px;
+      height: 4px;
+
+      background-color: #1f2020;
+      border-radius: 40px;
+    }
+  }
+}
+@media (max-width: 1020px) {
+  .colors-list {
+    &_filter {
+      display: none;
+    }
+
+    &_content {
+      width: 100%;
+    }
+
+    .header_amount {
+      display: none;
+    }
+  }
+
+  .mobile-filter-button {
+    display: block;
+  }
+}
+
+@media (max-width: 1020px) {
+  .colors-list {
+    &_filter {
+      display: none;
+    }
+
+    &_content {
+      width: 100%;
     }
   }
 }
