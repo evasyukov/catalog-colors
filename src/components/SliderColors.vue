@@ -170,7 +170,7 @@ function movePoint(direction) {
 
       position: absolute;
       top: 580px;
-      left: 850px;
+      left: 45%;
 
       z-index: 2;
 

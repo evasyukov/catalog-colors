@@ -98,6 +98,22 @@ const addToCart = () => {
           cursor: pointer;
           background-color: #7bb899;
         }
+
+        @media (max-width: 1024px) {
+          width: 50px;
+          height: 24px;
+
+          font-size: 24px;
+
+          opacity: 1;
+          visibility: visible;
+        }
+
+        @media (max-width: 480px) {
+          width: 32px;
+          height: 18px;
+          font-size: 14px;
+        }
       }
     }
   }
@@ -116,11 +132,6 @@ const addToCart = () => {
 
     .price {
       font-size: 14px;
-    }
-
-    .btn-add {
-      opacity: 1;
-      visibility: visible;
     }
   }
 
