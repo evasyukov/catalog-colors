@@ -1,15 +1,15 @@
 <template>
-  <div class="items">
-    <div class="items_image">
+  <div class="item">
+    <div class="item_image">
       <img :src="item.color_image" alt="Краска" />
     </div>
 
-    <div class="items_info">
+    <div class="item_info">
       <p class="name">{{ item.color_name }}</p>
       <p class="price">{{ item.color_price }} ₽</p>
     </div>
 
-    <div class="items_amount">
+    <div class="item_amount">
       <button class="btn" @click="updateQuantity(-1)">
         <img src="../assets/icons/minus.svg" alt="" />
       </button>
@@ -19,7 +19,7 @@
       </button>
     </div>
 
-    <button class="items_delete" @click="removeItem">
+    <button class="item_delete" @click="removeItem">
       <img src="../assets/icons/close.svg" alt="" />
     </button>
   </div>
@@ -48,7 +48,7 @@ const removeItem = () => {
 </script>
 
 <style lang="scss" scoped>
-.items {
+.item {
   display: flex;
   align-items: center;
 
@@ -65,8 +65,6 @@ const removeItem = () => {
 
   &_info {
     width: 165px;
-    height: 68px;
-
     margin-right: 62px;
 
     display: flex;
@@ -82,11 +80,17 @@ const removeItem = () => {
       margin: 0;
       font-weight: 600;
     }
+
+    @media (max-width: 540px) {
+      font-size: 14px;
+      margin-right: 0;
+    }
   }
 
   &_amount {
     display: flex;
     align-items: center;
+    gap: 20px;
 
     .btn {
       width: 40px;
@@ -103,11 +107,19 @@ const removeItem = () => {
         width: 16px;
         height: 16px;
       }
+
+      @media (max-width: 540px) {
+        width: 32px;
+        height: 20px;
+      }
     }
 
     .amount {
       font-size: 16px;
-      margin: 0 20px;
+    }
+
+    @media (max-width: 540px) {
+      gap: 12px;
     }
   }
 
@@ -123,10 +135,8 @@ const removeItem = () => {
 
     cursor: pointer;
 
-
     img {
       color: #a6a6a6;
-
     }
   }
 }

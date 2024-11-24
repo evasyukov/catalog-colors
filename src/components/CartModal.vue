@@ -126,7 +126,7 @@ const changeVisibleCart = () => {
       border: 1px solid #e6e6e6;
       cursor: pointer;
 
-      img{
+      img {
         width: 20px;
         height: 20px;
       }
@@ -134,6 +134,9 @@ const changeVisibleCart = () => {
   }
 
   &_body {
+    overflow-y: auto;
+    max-height: 80%;
+
     .count {
       display: flex;
       justify-content: space-between;
@@ -142,6 +145,10 @@ const changeVisibleCart = () => {
       padding-bottom: 10px;
 
       font-size: 14px;
+      background-color: #fff;
+
+      position: sticky;
+      top: 0;
 
       p {
         font-weight: 400;
@@ -165,7 +172,7 @@ const changeVisibleCart = () => {
   &_empty {
     display: flex;
     justify-content: center;
-  
+
     font-size: 24px;
     font-weight: 300;
 
@@ -207,9 +214,12 @@ const changeVisibleCart = () => {
     }
   }
 
-
   @media (max-width: 720px) {
     width: 100%;
+  }
+
+  @media (max-width: 540px) {
+    width: 80%;
   }
 }
 </style>

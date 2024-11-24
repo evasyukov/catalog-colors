@@ -43,6 +43,10 @@ const activeSort = ref(sort.value[0])
 
 // выбор сортровки
 const selectSort = (item) => {
+  sort.value.forEach((sortItem) => {
+    sortItem.active = sortItem.title === item.title
+  })
+
   activeSort.value = item
   emits("sort", item.title)
 
@@ -60,7 +64,6 @@ const selectSort = (item) => {
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.5px;
-
   }
 }
 

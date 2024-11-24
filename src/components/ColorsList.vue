@@ -172,7 +172,12 @@ const endSwipe = (event) => {
 
       &_sort {
         display: flex;
-        font-size: 14px;
+        cursor: pointer;
+
+        img {
+          width: 24px;
+          height: 24px;
+        }
 
         @media (max-width: 450px) {
           font-size: 10px;
