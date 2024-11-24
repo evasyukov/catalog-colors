@@ -26,7 +26,6 @@
 </template>
 
 <script setup>
-import { defineProps } from "vue"
 import { useColorsStore } from "../storeColors"
 
 const props = defineProps({
