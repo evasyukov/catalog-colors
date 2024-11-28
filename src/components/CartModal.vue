@@ -24,7 +24,7 @@
           </div>
 
           <div class="items">
-            <ItemCart
+            <CartItem
               v-for="item in colorsStore.cart"
               :key="item.id"
               :item="item"
@@ -52,7 +52,7 @@
 
 <script setup>
 import { ref } from "vue"
-import ItemCart from "./ItemCart.vue"
+import CartItem from "./CartItem.vue"
 import { useColorsStore } from "../storeColors"
 const colorsStore = useColorsStore()
 
@@ -212,14 +212,6 @@ const changeVisibleCart = () => {
 
       cursor: pointer;
     }
-  }
-
-  @media (max-width: 720px) {
-    width: 100%;
-  }
-
-  @media (max-width: 540px) {
-    width: 80%;
   }
 }
 </style>

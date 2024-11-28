@@ -5,7 +5,7 @@
   <div class="colors-list" v-else>
     <!-- фильтр  -->
     <div class="colors-list_filter">
-      <ColorsFilter @filter="filterValue" class="max" />
+      <ColorsListFilter @filter="filterValue" class="max" />
     </div>
 
     <!-- список   -->
@@ -14,13 +14,8 @@
         <div class="header_amount">
           <span>{{ sortedColors.length }} ТОВАРОВ</span>
         </div>
-        <div class="mobile-filter-button">
-          <button @click="toggleFilterModal">ФИЛЬТРЫ</button>
-        </div>
-
         <div class="header_sort">
-          <ColorsSort @sort="sortValue" />
-          <img src="../assets/icons/sort.svg" alt="" />
+          <ColorsListSort @sort="sortValue" />
         </div>
       </div>
 
@@ -33,28 +28,15 @@
       </div>
     </div>
   </div>
-
-  <div class="filter-modal" v-if="isFilterModalOpen">
-    <div class="modal-header" @touchstart="startSwipe" @touchend="endSwipe">
-      <div class="swipe-bar"></div>
-    </div>
-    <ColorsFilter @filter="filterValue" />
-  </div>
-
-  <div
-    class="overlay"
-    v-if="isFilterModalOpen"
-    @click="toggleFilterModal"
-  ></div>
 </template>
 
 <script setup>
-import { computed, onMounted, onUnmounted, ref } from "vue"
+import { computed, ref } from "vue"
 
 // components
-import ColorsFilter from "./ColorsFilter.vue"
+import ColorsListFilter from "./ColorsListFilter.vue"
 import ItemColor from "./ItemColor.vue"
-import ColorsSort from "./ColorsSortModal.vue"
+import ColorsListSort from "./ColorsListSort.vue"
 
 // store
 import { useColorsStore } from "../storeColors"
@@ -98,37 +80,6 @@ const sortedColors = computed(() => {
       return colorsFilter.sort((a, b) => b.color_price - a.color_price)
   }
 })
-
-const isMobile = ref(window.innerWidth < 1020)
-const isFilterModalOpen = ref(false)
-
-const checkScreenSize = () => {
-  isMobile.value = window.innerWidth <= 1020
-}
-
-const toggleFilterModal = () => {
-  isFilterModalOpen.value = !isFilterModalOpen.value
-}
-
-onMounted(() => {
-  window.addEventListener("resize", checkScreenSize)
-})
-onUnmounted(() => {
-  window.removeEventListener("resize", checkScreenSize)
-})
-
-const touchStartY = ref(0)
-
-const startSwipe = (event) => {
-  touchStartY.value = event.touches[0].clientY
-}
-
-const endSwipe = (event) => {
-  const touchEndY = event.changedTouches[0].clientY
-  if (touchEndY - touchStartY.value > 70) {
-    toggleFilterModal()
-  }
-}
 </script>
 
 <style scoped lang="scss">
@@ -178,10 +129,6 @@ const endSwipe = (event) => {
           width: 24px;
           height: 24px;
         }
-
-        @media (max-width: 450px) {
-          font-size: 10px;
-        }
       }
     }
 
@@ -206,78 +153,5 @@ const endSwipe = (event) => {
   display: flex;
   justify-content: flex-end;
   z-index: 1;
-}
-
-.mobile-filter-button {
-  text-align: center;
-  display: none;
-
-  button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 12px;
-    letter-spacing: 1px;
-  }
-}
-
-.filter-modal {
-  width: 100%;
-  height: 60%;
-
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: 2;
-
-  background-color: #fff;
-
-  border-top-left-radius: 24px;
-  border-top-right-radius: 24px;
-
-  .modal-header {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-
-    .swipe-bar {
-      width: 30px;
-      height: 4px;
-
-      background-color: #1f2020;
-      border-radius: 40px;
-    }
-  }
-}
-@media (max-width: 1020px) {
-  .colors-list {
-    &_filter {
-      display: none;
-    }
-
-    &_content {
-      width: 100%;
-    }
-
-    .header_amount {
-      display: none;
-    }
-  }
-
-  .mobile-filter-button {
-    display: block;
-  }
-}
-
-@media (max-width: 1020px) {
-  .colors-list {
-    &_filter {
-      display: none;
-    }
-
-    &_content {
-      width: 100%;
-    }
-  }
 }
 </style>

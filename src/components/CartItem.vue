@@ -79,11 +79,6 @@ const removeItem = () => {
       margin: 0;
       font-weight: 600;
     }
-
-    @media (max-width: 540px) {
-      font-size: 14px;
-      margin-right: 0;
-    }
   }
 
   &_amount {
@@ -106,19 +101,10 @@ const removeItem = () => {
         width: 16px;
         height: 16px;
       }
-
-      @media (max-width: 540px) {
-        width: 32px;
-        height: 20px;
-      }
     }
 
     .amount {
       font-size: 16px;
-    }
-
-    @media (max-width: 540px) {
-      gap: 12px;
     }
   }
 

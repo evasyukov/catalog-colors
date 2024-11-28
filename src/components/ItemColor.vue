@@ -97,22 +97,6 @@ const addToCart = () => {
           cursor: pointer;
           background-color: #7bb899;
         }
-
-        @media (max-width: 1024px) {
-          width: 50px;
-          height: 24px;
-
-          font-size: 24px;
-
-          opacity: 1;
-          visibility: visible;
-        }
-
-        @media (max-width: 480px) {
-          width: 32px;
-          height: 18px;
-          font-size: 14px;
-        }
       }
     }
   }
@@ -120,43 +104,6 @@ const addToCart = () => {
   &:hover .btn-add {
     opacity: 1;
     visibility: visible;
-  }
-
-  @media (max-width: 1024px) {
-    width: 200px;
-  }
-
-  @media (max-width: 860px) {
-    width: 150px;
-
-    .price {
-      font-size: 14px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .btn-add {
-      width: 32px;
-      height: 28px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    width: 110px;
-
-    &_image {
-      img {
-        padding: 15px;
-      }
-    }
-
-    .description {
-      font-size: 12px;
-    }
-
-    .price {
-      font-size: 12px;
-    }
   }
 }
 </style>

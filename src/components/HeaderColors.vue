@@ -14,7 +14,6 @@
 
       <div class="logo">
         <p>COLORS</p>
-        <img src="../assets/icons/point.svg" alt="" />
       </div>
 
       <div class="menu">
@@ -26,8 +25,7 @@
       </div>
 
       <div class="contact">
-        <span>+7 (495) 221-77-69</span>
-        <button>Заказать звонок</button>
+        <a href="tel:+79991112233">999-999-99-99</a>
       </div>
 
       <div class="account">
@@ -152,129 +150,6 @@ const toggleMenu = () => {
         align-items: center;
 
         cursor: pointer;
-      }
-    }
-  }
-}
-
-@media (max-width: 1024px) {
-  .header_container {
-    .logo {
-      font-size: 18px;
-      // font-weight: 600;
-    }
-
-    .menu {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-
-      font-weight: 300;
-
-      &_item {
-        width: max-content;
-        cursor: pointer;
-
-        font-size: 13px;
-      }
-    }
-
-    .contact {
-      span {
-        font-size: 12px;
-        text-align: start;
-      }
-
-      button {
-        font-size: 12px;
-      }
-    }
-
-    .account {
-      gap: 12px;
-    }
-  }
-}
-
-@media (max-width: 790px) {
-  .header_container {
-    .logo {
-      font-size: 24px;
-    }
-
-    .burger {
-      display: block;
-      width: 24px;
-      height: 24px;
-
-      cursor: pointer;
-
-      .dropdown_menu {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        width: 200px;
-        background-color: #fff;
-
-        position: absolute;
-        top: 60px;
-        left: 0px;
-
-        z-index: 1;
-
-        .menu_item {
-          width: 80%;
-          padding: 16px 20px;
-
-          border-bottom: 1px solid #d7d7d7;
-
-          &:last-child {
-            border-bottom: none;
-          }
-        }
-      }
-    }
-
-    .account {
-      gap: 24px;
-    }
-
-    .menu,
-    .contact {
-      display: none;
-    }
-  }
-}
-
-@media (max-width: 425px) {
-  .header_container {
-    .logo {
-      font-size: 24px;
-      margin-left: 70px;
-
-      img {
-        margin-left: 4px;
-      }
-    }
-
-    .burger {
-      display: block;
-      width: 24px;
-      height: 24px;
-
-      margin-left: 30px;
-
-      cursor: pointer;
-    }
-
-    .account_item:not(:last-child) {
-      display: none;
-    }
-
-    .account {
-      &_cart {
-        margin-left: 80px;
       }
     }
   }

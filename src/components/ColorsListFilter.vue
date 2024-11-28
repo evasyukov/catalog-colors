@@ -52,15 +52,4 @@ watch(
     }
   }
 }
-
-@media (max-width: 1020px) {
-  .filter-list {
-    width: 100%;
-    padding: 10px;
-
-    &_item {
-      margin: 12px 0;
-    }
-  }
-}
 </style>
